@@ -41,7 +41,7 @@ function setup() {
   tf.setBackend('cpu');
 
   slider = createSlider(1, 10, 1);
-  speedLabel = createElement('h3', 'Set speed:');
+  speedLabel = createElement('h4', 'Set speed:');
   speedLabel.position(gameWidth + 20, gameHeight + 20);
 
   input = createInput(TOTAL);
@@ -51,7 +51,7 @@ function setup() {
   button.position(input.x + input.width, 100);
   button.mousePressed(setPopulation);
 
-  populationLabel = createElement('h2', 'Set population: (1-500)');
+  populationLabel = createElement('h4', 'Set population: (1-500)');
   populationLabel.position(gameWidth + 20, 50);
 
   textSize(50);
