@@ -3,7 +3,7 @@
 // http://thecodingtrain.com
 // https://youtu.be/cdUNkwXx-I4
 
-const TOTAL = 100;
+let TOTAL = parseInt(sessionStorage.getItem('POPULATION'), 10) || 10;
 let birds = [];
 let savedBirds = [];
 let pipes = [];
@@ -13,6 +13,9 @@ let paused = false;
 let score = 0;
 let record = 0;
 let generation = 0;
+let input, button, populationLabel, speedLabel;
+let gameWidth = 1600;
+let gameHeight = 800;
 
 function keyPressed() {
   if (key === 'S') {
@@ -33,10 +36,25 @@ function keyPressed() {
 }
 
 function setup() {
-  createCanvas(1200, 600);
+
+  createCanvas(gameWidth, gameHeight);
   tf.setBackend('cpu');
 
   slider = createSlider(1, 10, 1);
+  speedLabel = createElement('h3', 'Set speed:');
+  speedLabel.position(gameWidth + 20, gameHeight + 20);
+
+  input = createInput(TOTAL);
+  input.position(gameWidth + 20, 100);
+
+  button = createButton('Restart');
+  button.position(input.x + input.width, 100);
+  button.mousePressed(setPopulation);
+
+  populationLabel = createElement('h2', 'Set population: (1-500)');
+  populationLabel.position(gameWidth + 20, 50);
+
+  textSize(50);
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = new Bird();
@@ -94,13 +112,14 @@ function draw() {
   // Display score
   textSize(24);
   fill(255, 0, 0);
-  text("Score: " + score, 10, 30);
+  text("Score: " + score, 50, 30);
   textSize(24);
   fill(255, 0, 0);
-  text("Record: " + record, 170, 30);
+  text("Record: " + record, 210, 30);
   textSize(24);
   fill(255, 0, 0);
-  text("Generation: " + generation, 350, 30);
+  text("Generation: " + generation, 390, 30);
+  fill(255, 0, 0);
 
   for (let bird of birds) {
     bird.show();
@@ -121,6 +140,21 @@ function draw() {
         window.location.reload();
       }, 5000);
     }
+  }
+}
+
+function setPopulation() {
+  const population = input.value();
+
+  if (parseInt(population, 10)) {
+    if (population <= 0 || population > 500) {
+      alert('Value must be between 1-500')
+    } else {
+      sessionStorage.setItem('POPULATION', population);
+      window.location.reload();
+    }
+  } else {
+    alert('Please enter a valid value for the population')
   }
 }
 
