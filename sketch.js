@@ -54,7 +54,7 @@ function setup() {
   button.position(input.x + input.width, 160);
   button.mousePressed(setPopulation);
   button.style('font-size', '30px');
-  button.size(125, 56)
+  button.size(145, 60)
 
   populationLabel = createElement('h1', 'Set population:');
   populationLabel.position(gameWidth + 20, 50);
