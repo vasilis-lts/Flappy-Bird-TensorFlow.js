@@ -39,22 +39,28 @@ function setup() {
 
   createCanvas(gameWidth, gameHeight);
   tf.setBackend('cpu');
+  textSize(50);
 
   slider = createSlider(1, 10, 1);
-  speedLabel = createElement('h4', 'Set speed:');
-  speedLabel.position(gameWidth + 20, gameHeight + 20);
+  speedLabel = createElement('h1', 'Set speed:');
+  speedLabel.position(gameWidth + 20, gameHeight - 10);
 
   input = createInput(TOTAL);
-  input.position(gameWidth + 20, 100);
+  input.position(gameWidth + 20, 160);
+  input.style('font-size', '30px');
+  input.size(100, 50)
 
   button = createButton('Restart');
-  button.position(input.x + input.width, 100);
+  button.position(input.x + input.width, 160);
   button.mousePressed(setPopulation);
+  button.style('font-size', '30px');
+  button.size(125, 56)
 
-  populationLabel = createElement('h4', 'Set population: (1-500)');
+  populationLabel = createElement('h1', 'Set population:');
   populationLabel.position(gameWidth + 20, 50);
+  populationLabel = createElement('h2', '(1-500)');
+  populationLabel.position(gameWidth + 20, 95);
 
-  textSize(50);
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = new Bird();
